@@ -66,5 +66,42 @@ local skin_modes = {
     },
 }
 
+local function is_meat(item)
+    return item.components.edible ~= nil and item.components.edible.foodtype == GLOBAL.FOODTYPE.MEAT and not item:HasTag("smallcreature")
+end
+
+local RETARGET_MUST_TAGS = { "_combat", "_health" }
+local RETARGET_ONEOF_TAGS = { "monster", "player" }
+local function newretargetfn(inst)
+    return not inst:IsInLimbo()
+        and GLOBAL.FindEntity(
+                inst,
+                TUNING.PIG_TARGET_DIST,
+                function(guy)
+                    return inst.components.combat:CanTarget(guy)
+                        and (guy:HasTag("monster")
+                            or (guy.components.inventory ~= nil and
+                                guy:IsNear(inst, TUNING.BUNNYMAN_SEE_MEAT_DIST) and
+								guy.components.inventory:FindItem(is_meat) ~= nil and
+								not guy:HasTag("bunnyfriend")))
+                end,
+                RETARGET_MUST_TAGS, -- see entityreplica.lua
+                nil,
+                RETARGET_ONEOF_TAGS
+            )
+        or nil
+end
+
+
+
+local function newbunnymanfn(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	inst.components.combat:SetRetargetFunction(3, newretargetfn)
+end
+
+
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("wisproot", "MALE", skin_modes)
+AddPrefabPostInit("bunnyman", newbunnymanfn)

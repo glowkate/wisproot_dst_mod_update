@@ -140,6 +140,10 @@ end
 
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
+	inst:AddTag("soulless")
+	inst:AddTag("bunnyfriend")
+	inst:AddTag("wisproot_builder")
+	
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "wisproot.tex" )
 end
@@ -164,6 +168,12 @@ local master_postinit = function(inst)
 	
 	inst.components.sanity.night_drain_mult = TUNING.WISPROOT_SANITY_NIGHT_MULT
     inst.components.sanity.neg_aura_mult = TUNING.WISPROOT_SANITY_AURA_MULT
+	
+	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY --Wisproot is used to the cold caves
+	inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
+	
+	inst.components.foodaffinity:AddPrefabAffinity("carrot", TUNING.AFFINITY_15_CALORIES_SMALL)
+	inst.components.foodaffinity:AddPrefabAffinity("carrot_cooked", TUNING.AFFINITY_15_CALORIES_SMALL)
 	
 	-- Damage multiplier (optional)
     inst.components.combat.damagemultiplier = 1
