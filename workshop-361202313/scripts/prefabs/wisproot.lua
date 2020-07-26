@@ -142,7 +142,7 @@ end
 local common_postinit = function(inst) 
 	inst:AddTag("soulless")
 	inst:AddTag("bunnyfriend")
-	inst:AddTag("wisproot_builder")
+	inst:AddTag("wisprootbuilder")
 	
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "wisproot.tex" )
@@ -169,8 +169,8 @@ local master_postinit = function(inst)
 	inst.components.sanity.night_drain_mult = TUNING.WISPROOT_SANITY_NIGHT_MULT
     inst.components.sanity.neg_aura_mult = TUNING.WISPROOT_SANITY_AURA_MULT
 	
-	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY --Wisproot is used to the cold caves
-	inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
+	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
+    inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
 	
 	inst.components.foodaffinity:AddPrefabAffinity("carrot", TUNING.AFFINITY_15_CALORIES_SMALL)
 	inst.components.foodaffinity:AddPrefabAffinity("carrot_cooked", TUNING.AFFINITY_15_CALORIES_SMALL)
