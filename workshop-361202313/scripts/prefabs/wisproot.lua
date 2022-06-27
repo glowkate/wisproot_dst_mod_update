@@ -5,23 +5,21 @@ local assets = {
 }
 
 -- Your character's stats
-TUNING.WISPROOT_HEALTH = 150
+TUNING.WISPROOT_HEALTH = 200
 TUNING.WISPROOT_HUNGER = 150
-TUNING.WISPROOT_SANITY = 200
+TUNING.WISPROOT_SANITY = 100
 
 TUNING.WISPROOT_SANITY_AURA_MULT = 0.9
 TUNING.WISPROOT_SANITY_NIGHT_MULT = 0.5
 
-TUNING.WISPROOT_START_WEAK_THRESH = 80
-TUNING.WISPROOT_START_VERYWEAK_THRESH = 30
+TUNING.WISPROOT_START_WEAK_THRESH = 50
+TUNING.WISPROOT_START_VERYWEAK_THRESH = 25
 
-TUNING.WISPROOT_END_WEAK_THRESH = 85
-TUNING.WISPROOT_END_VERYWEAK_THRESH = 35
+TUNING.WISPROOT_END_WEAK_THRESH = 55
+TUNING.WISPROOT_END_VERYWEAK_THRESH = 30
 
 -- Custom starting inventory
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WISPROOT = {
-	"nightmarefuel",
-	"nightmarefuel",
 	"nightmarefuel",
 	"nightmarefuel",
 }
@@ -143,6 +141,7 @@ local common_postinit = function(inst)
 	inst:AddTag("soulless")
 	inst:AddTag("bunnyfriend")
 	inst:AddTag("wisprootbuilder")
+	inst:AddTag("shadow")
 	
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "wisproot.tex" )
@@ -168,9 +167,6 @@ local master_postinit = function(inst)
 	
 	inst.components.sanity.night_drain_mult = TUNING.WISPROOT_SANITY_NIGHT_MULT
     inst.components.sanity.neg_aura_mult = TUNING.WISPROOT_SANITY_AURA_MULT
-	
-	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
-    inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
 	
 	inst.components.foodaffinity:AddPrefabAffinity("carrot", TUNING.AFFINITY_15_CALORIES_SMALL)
 	inst.components.foodaffinity:AddPrefabAffinity("carrot_cooked", TUNING.AFFINITY_15_CALORIES_SMALL)
